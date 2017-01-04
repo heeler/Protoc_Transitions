@@ -1,0 +1,122 @@
+syntax = "proto3";
+
+
+package xics;
+
+option csharp_namespace = "SCIEX.aws";
+
+// The idea behind this encoding is that there is a header with
+// a precursor, time range, and fragment mzs. Afert this the Xics
+// are appended in the same index order as the fragment mz as independent
+// messages.
+
+enum IonType {
+	PRECURSOR = 0;
+	PRODUCT = 1;
+	AUX_PRECURSOR = 2;
+	AUX_PRODUCT = 3;
+}
+
+message TransitionList{
+
+
+	enum TargetType {
+		STRING = 0;
+		PEPTIDE = 1;
+		// More to add as functionality increases
+	}
+
+	message IonSet {
+		bool useAuxIons = 1;
+		Ion mono = 2;
+		repeated double auxIonOffsets = 3;
+		repeated Ion auxIons = 4;
+		repeated bool agreeMono = 9; // added this remove imbeded logic in code
+		IonType ionType = 5;
+		int32 z = 6;
+		string label = 7;
+		repeated IonSet productIons = 8;
+	}
+
+	message Ion {
+		IonType ionType = 1;
+		double targetMz = 2;
+		int32 z = 3;
+		double I = 4;
+		string label = 5; // this is here for y-ion etc but not critical
+		double ppmOrWidth = 6;
+		bool usePPM = 7;
+		repeated int32 xicIndex = 8; // could be empty if swathWindows is empty
+		repeated uint32 swathWindows = 9; // can be empty
+	}
+
+	TargetType targetType = 1;
+	repeated IonSet ion_list = 2;
+	double rtStart = 3;
+	double rtStop = 4;
+	double gaussianSmoothXics = 5;
+	bool generatePrecursorMs1Xic = 6;
+	int64 objIndex = 7;
+	bool retrieveMultipleXicsPerPrecursor = 8;
+	// google.protobuf.Any dataType = 8; //add later if we need to incorporate complex data types
+}
+
+
+
+message XicHeader{
+	int64 TotalXics = 1;
+	int64 size = 2; //xic length
+	string wiffName = 3;
+}
+
+message SwathWindow{
+	double mzStart = 1;
+	double mzStop = 2;
+	uint32 experimentNumber = 3;
+}
+
+message XicData{
+	message RtIpair{
+		double rt = 1;
+		double I = 2;
+	}
+	repeated RtIpair rtI = 1;
+	double msPrecursor = 2;
+	double msProduct = 3;
+	IonType xicType = 4;
+	uint32 swathWindow = 5;
+}
+
+message XicSetHeader{
+	int64 TotalXicSets = 1;
+	string wiffName = 2;
+}
+
+message XicSet{
+	bool useAuxXics = 1;
+	bool isPrecursorXic = 2;
+	XicData monoXic = 3;
+	repeated double auxIonOffsets = 4;
+	repeated XicData auxXics = 5;
+	repeated bool agreeMono = 6; // added this remove imbeded logic in code
+	// isMono is added later by the first lambda function
+	repeated double isMonoIso = 7; // bool vector length of XIC showing where XIC is Monoisotopic
+}
+
+message RtScore{
+	double rt = 1;
+	double score = 2;
+}
+
+message SigmaCurvesHeader{
+	uint64 nOfSigmaCurves = 1;
+}
+
+message SigmaCurve{
+	repeated RtScore score = 1;
+		int32 combinationIndex = 2;
+	}
+
+message ScoreCurve{
+	repeated RtScore score = 1;
+}
