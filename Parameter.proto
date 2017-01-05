@@ -1,4 +1,4 @@
-syntax = "proto2";
+syntax = "proto3";
 
 package HT_Proto;
 
@@ -11,33 +11,33 @@ message Parameter{
         PROTEINS = 1;
         SEQUENCES = 2;
     }
-    required string aaPath = 1;
-    required string proteinDbPath = 2;
-    required string regexCleavage = 3;
-    required uint32 maxCharge = 4;
-    required double minMz = 5;
-    required double maxMz = 6;
-    required double msResolution = 7;
-    required double msMsResolution = 8;
-    required uint32 numberOfMiscleavages = 9;
-    required uint32 numberOfIsotopes = 10;
-    required uint32 orderOfUis = 11;
-    required TargetMode targetMode = 12;
+    string aaPath = 1;
+    string proteinDbPath = 2;
+    string regexCleavage = 3;
+    uint32 maxCharge = 4;
+    double minMz = 5;
+    double maxMz = 6;
+    double msResolution = 7;
+    double msMsResolution = 8;
+    uint32 numberOfMiscleavages = 9;
+    uint32 numberOfIsotopes = 10;
+    uint32 orderOfUis = 11;
+    TargetMode targetMode = 12;
     
-    required string binPath = 13;
-    required string uisPath = 14;
+    string binPath = 13;
+    string uisPath = 14;
 
-    required bool mIons = 15;
-    required bool aIons = 16;
-    required bool aMinusNH3ions = 17;
-    required bool bIons = 18;
-    required bool bMinusH2Oions = 19;
-    required bool bMinusNH3ions = 20;
-    required bool yIons = 21;
-    required bool yMinusH2Oions = 22;
-    required bool yMinusNH3ions = 23;
-    required bool peelingIons = 24;
+    bool mIons = 15;
+    bool aIons = 16;
+    bool aMinusNH3ions = 17;
+    bool bIons = 18;
+    bool bMinusH2Oions = 19;
+    bool bMinusNH3ions = 20;
+    bool yIons = 21;
+    bool yMinusH2Oions = 22;
+    bool yMinusNH3ions = 23;
+    bool peelingIons = 24;
 
-    repeated string proteinList = 25;
-    repeated string sequenceList = 26;
+    string proteinList = 25;
+    string sequenceList = 26;
 }
