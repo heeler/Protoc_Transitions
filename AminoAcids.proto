@@ -1,0 +1,33 @@
+package HT_Proto;
+
+// to generate the c++ code use commandline
+// protoc -I=. --cpp_out=. ./AminoAcids.proto
+
+message AminoAcid {
+    enum LossType {
+        noloss = 0;
+        sidechain = 1;
+        ptm = 2; 
+        conditionalPtm = 3;
+        unknown = 4;
+    }
+    
+    required uint32 letter = 1; // store the character as an integer
+    required uint32 index = 2;
+    required string shortName = 3;
+    required string longName = 4;
+    required double mass = 5;
+    required double fragmentMass = 6;
+    required bool holdsProton = 7;
+    required bool lossOfWater = 8;
+    required bool lossOfAmonia = 9;
+    required bool generatesCapIon = 10;
+    required LossType generatesModLossIon = 11 [default = noloss];
+    required float hydrophobicity = 12 [default = 0.0];
+}
+
+
+message AminoAcidsTable {
+    repeated AminoAcid aa = 1;
+    optional string description = 2;
+}

@@ -1,3 +1,4 @@
-Transitions.pb.h
-Transitions.pb.cc
-Transitions.cs
+*.pb.h
+*.pb.cc
+*.cs
+*.o

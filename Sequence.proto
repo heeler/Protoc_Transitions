@@ -1,0 +1,47 @@
+package HT_Proto;
+
+// to generate the c++ code use commandline
+// protoc -I=. --cpp_out=. ./AminoAcids.proto
+
+message Char16t {
+    required uint32 aa = 1;
+    optional uint32 modindex = 2;
+}
+
+message UniprotId{
+    enum Database {
+        UNIPROT = 0;
+        GENBANK = 1;
+        IPI = 2;
+    }
+    required Database db = 1 [default = UNIPROT];
+    required string uid = 2;
+    optional string entryName = 3;
+    optional string proteinName = 4;
+    optional string organismName = 5;
+    optional string geneName = 6;
+    optional string proteinExistence = 7;
+    optional string sequenceVersion = 8;
+}
+
+message AASequence {
+    repeated Char16t sequence = 1;
+}
+
+message Protein {
+//    require string sequence = 1;
+    required AASequence sequence = 1;
+    optional UniprotId uniprotId = 2;    
+}
+
+message Peptide {
+    required AASequence sequence = 1;
+    repeated string uids = 2;
+    required double mass = 3;
+    required uint32 Z = 4;
+    required uint32 maxZ = 5;
+}
+
+
+
+
