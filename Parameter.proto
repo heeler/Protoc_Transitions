@@ -38,6 +38,6 @@ message Parameter{
     bool yMinusNH3ions = 23;
     bool peelingIons = 24;
 
-    string proteinList = 25;
-    string sequenceList = 26;
+    repeated string proteinList = 25;
+    repeated string sequenceList = 26;
 }
