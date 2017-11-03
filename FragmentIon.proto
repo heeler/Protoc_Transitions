@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package HT_Proto;
+
+import "AminoAcids.proto";
+
+message FragmentIon {
+
+    enum IonType {
+        bIon = 0;
+        yIon = 1;
+        ptm = 2;
+        conditionalPtm = 3;
+        unknown = 4;
+    }
+
+
+    IonType ionType = 1;
+    uint32 position = 2;
+    uint32 charge = 3;
+    double mz = 4;
+    AminoAcid.LossType modLoss = 5;
+
+}
+

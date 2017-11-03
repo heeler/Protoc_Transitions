@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package HT_Proto;
+
+import "Sequence.proto";
+import "FragmentIon.proto";
+
+
+message TargetBin {
+    Peptide seed = 1;
+    repeated Peptide background = 2;
+    repeated uint32 counts = 3;
+    repeated FragmentIon fragmentIons = 4;
+}
+
+message ProteinBin {
+    Protein protein = 1;
+    repeated TargetBin peptideTargets = 2;
+}
+
+

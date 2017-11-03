@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package HT_Proto;
+
+import "Sequence.proto";
+import "TargetBin.proto";
+
+
+// followed with Peptides listed
+
+message ProPepTargetBin {
+
+  Protein protein = 1;
+  repeated TargetBin target = 2;
+//  uint64 target_peptide_combinations = 3;
+
+}
+
+message OneDTargetBin {
+
+  Peptide seed = 1;
+  uint64 background_length = 2;
+
+}
+
+message PepCombTargetBin {
+
+  Peptide seedA = 1;
+  Peptide seedB = 2;
+  uint64 nOfAddresses = 3;
+
+}
+
+message PepCoord {
+  float rt = 1;
+  double qOne = 2;
+  double qThreeA = 3;
+  double qThreeB = 4;
+}
+
+
+message PepCoordPair {
+
+  PepCoord pcordA = 1;
+  PepCoord pcordB = 2;
+  uint64 count = 3;
+
+}
