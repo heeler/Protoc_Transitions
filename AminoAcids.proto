@@ -1,4 +1,4 @@
-syntax = "proto2";
+syntax = "proto3";
 
 package HT_Proto;
 
@@ -14,22 +14,22 @@ message AminoAcid {
         unknown = 4;
     }
     
-    required uint32 letter = 1; // store the character as an integer
-    required uint32 index = 2;
-    required string shortName = 3;
-    required string longName = 4;
-    required double mass = 5;
-    required double fragmentMass = 6;
-    required bool holdsProton = 7;
-    required bool lossOfWater = 8;
-    required bool lossOfAmonia = 9;
-    required bool generatesCapIon = 10;
-    required LossType generatesModLossIon = 11 [default = noloss];
-    required float hydrophobicity = 12 [default = 0.0];
+    uint32 letter = 1; // store the character as an integer
+    uint32 index = 2;
+    string shortName = 3;
+    string longName = 4;
+    double mass = 5;
+    double fragmentMass = 6;
+    bool holdsProton = 7;
+    bool lossOfWater = 8;
+    bool lossOfAmonia = 9;
+    bool generatesCapIon = 10;
+    LossType generatesModLossIon = 11; // will default to noloss
+    float hydrophobicity = 12; // numeric types default to 0.0;
 }
 
 
 message AminoAcidsTable {
     repeated AminoAcid aa = 1;
-    optional string description = 2;
+    string description = 2;
 }

@@ -17,6 +17,7 @@ message Parameter{
     uint32 maxCharge = 4;
     double minMz = 5;
     double maxMz = 6;
+    double swathWidth = 27;
     double msResolution = 7;
     double msMsResolution = 8;
     uint32 numberOfMiscleavages = 9;
